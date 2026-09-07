@@ -1,0 +1,297 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    overflow-x: hidden;
+    background-color: #f4f4f4;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* --- ОТОБРАЖЕНИЕ БЛОКОВ ИЗОБРАЖЕНИЙ --- */
+.block {
+    width: 100%;
+    line-height: 0;
+}
+
+.block img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+/* --- ОВЕРЛЕЙ КОНВЕРТА --- */
+.envelope-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    cursor: pointer;
+    overflow: hidden;
+    background-color: transparent;
+}
+
+/* Базовые свойства створок */
+.env-part {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+}
+
+/* Z-индексы деталей */
+.env-sides {
+    z-index: 1;
+}
+
+.env-bottom {
+    z-index: 2;
+}
+
+.env-top {
+    z-index: 3;
+}
+
+/* Бант в центре (увеличенный и смещенный чуть ниже) */
+.env-bow {
+    position: absolute;
+    top: 50%; /* Смещен ниже центра */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px; /* Увеличен размер */
+    height: auto;
+    z-index: 4;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.env-hint {
+    position: absolute;
+    bottom: 5%;
+    width: 100%;
+    text-align: center;
+    color: #561422;
+    font-size: 16px;
+    font-weight: bold;
+    z-index: 5;
+    font-family: 'Cormorant Infant', serif;
+    transition: opacity 0.4s ease;
+}
+
+/* --- АНИМАЦИЯ ОТКРЫТИЯ КОНВЕРТА --- */
+.envelope-overlay.open .env-top { 
+    transform: translateY(-100vh); 
+}
+
+.envelope-overlay.open .env-bottom { 
+    transform: translateY(100vh); 
+}
+
+.envelope-overlay.open .env-sides { 
+    opacity: 0;
+    transform: scale(1.1);
+}
+
+.envelope-overlay.open .env-bow,
+.envelope-overlay.open .env-hint {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.2);
+}
+
+/* --- СТИЛИ МОДАЛЬНОГО ОКНА И АНКЕТЫ --- */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 10001;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Карточка анкеты с фоном fon.png */
+.modal-content {
+    background-image: url('fon.png');
+    background-size: cover;
+    background-position: center;
+    border-radius: 30px;
+    width: 100%;
+    max-width: 360px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 35px 25px 30px 25px;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    font-family: 'Cormorant Infant', serif;
+    color: #561422;
+    text-align: left;
+}
+
+/* Кнопка закрытия */
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #561422;
+    line-height: 1;
+}
+
+/* Заголовки */
+.form-title {
+    font-size: 26px;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+    color: #561422;
+}
+
+.form-subtitle {
+    font-size: 13px;
+    text-align: center;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+    color: #561422;
+    opacity: 0.8;
+}
+
+/* Группы полей */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #561422;
+}
+
+/* Поле ввода текста */
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #561422;
+    background: transparent;
+    border-radius: 0;
+    font-family: 'Cormorant Infant', serif;
+    font-size: 16px;
+    color: #561422;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.form-group input[type="text"]::placeholder {
+    color: #561422;
+    opacity: 0.5;
+}
+
+/* Стилизация радио-кнопок и чекбоксов */
+.custom-radio,
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    user-select: none;
+}
+
+.custom-radio input,
+.custom-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Кастомный круг (Radio) */
+.radio-mark {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 18px;
+    width: 18px;
+    border: 1px solid #561422;
+    border-radius: 50%;
+    box-sizing: border-box;
+}
+
+.custom-radio input:checked ~ .radio-mark::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #561422;
+}
+
+/* Кастомный квадрат (Checkbox) */
+.checkbox-mark {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 18px;
+    width: 18px;
+    border: 1px solid #561422;
+    border-radius: 0;
+    box-sizing: border-box;
+}
+
+.custom-checkbox input:checked ~ .checkbox-mark::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background-color: #561422;
+}
+
+/* Кнопка "ОТПРАВИТЬ" */
+.submit-btn {
+    display: block;
+    width: 70%;
+    margin: 25px auto 0 auto;
+    padding: 12px;
+    background-color: #561422;
+    color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    font-family: 'Cormorant Infant', serif;
+    font-size: 16px;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.submit-btn:active {
+    opacity: 0.85;
+}

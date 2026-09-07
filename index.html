@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Приглашение</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <audio id="bg-music" src="music.mp3" preload="auto" loop></audio>
+
+    <div id="envelope-overlay" class="envelope-overlay">
+        <img src="env-sides.png" alt="Боковые створки" class="env-part env-sides">
+        <img src="env-top.png" alt="Верхняя створка" class="env-part env-top">
+        <img src="env-bottom.png" alt="Нижняя створка" class="env-part env-bottom">
+        <img src="bow.png" alt="Бант" class="env-bow">
+        
+    </div>
+
+    <main class="site-content">
+        <section class="block">
+            <img src="1.png" alt="Фото 1">
+        </section>
+
+        <section class="block">
+            <img src="2.png" alt="Фото 2">
+        </section>
+
+        <section class="block">
+            <a href="https://yandex.com/maps/org/avrora/96657563283/?ll=37.623483%2C55.768026&z=16" target="_blank" class="image-link">
+                <img src="3.png" alt="Фото 3">
+            </a>
+        </section>
+
+        <section class="block">
+            <img src="4.png" alt="Фото 4" id="open-modal-img" class="clickable">
+        </section>
+
+        <section class="block">
+            <img src="5.png" alt="Фото 5">
+        </section>
+
+        <section class="block">
+            <img src="6.png" alt="Фото 6">
+        </section>
+    </main>
+
+    <div id="modal-form" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="close-modal">&times;</span>
+            
+            <h2 class="form-title">АНКЕТА ГОСТЯ</h2>
+            <p class="form-subtitle">ПОЖАЛУЙСТА, ЗАПОЛНИТЕ:</p>
+            
+            <form id="rsvp-form">
+                <div class="form-group">
+                    <label for="fullname">Введите ваше имя и фамилию:</label>
+                    <input type="text" id="fullname" name="fullname" required placeholder="Ваше Имя и Фамилия">
+                </div>
+                
+                <div class="form-group">
+                    <label>Будете ли вы присутствовать?</label>
+                    <div class="radio-group">
+                        <label class="custom-radio">
+                            <input type="radio" name="attendance" value="yes" required>
+                            <span class="radio-mark"></span>
+                            Да, с радостью приду
+                        </label>
+                        <label class="custom-radio">
+                            <input type="radio" name="attendance" value="no">
+                            <span class="radio-mark"></span>
+                            К сожалению, не смогу
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">ОТПРАВИТЬ</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
